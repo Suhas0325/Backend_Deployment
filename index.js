@@ -13,7 +13,13 @@ app.get('/', (req, res) => {
 
 // API route
 app.get('/get_API', (req, res) => {
-    res.json({ apikey: process.env.API_KEY });
+    const apiKey = process.env.API_KEY;
+    if(apiKey){
+        res.json({apiKey});
+    }
+    else{
+        res.status(500).json({error : "API key not found"});
+    }
 });
 
 app.listen(port , ()=>{
